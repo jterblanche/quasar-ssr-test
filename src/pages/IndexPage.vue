@@ -26,7 +26,7 @@ export default {
     stateStore.isomorphicItem.value = 'This is an isomorphic item';
 
     /**
-     * The prefetchArgs object contains a ssrContext property, which is supplied server-side, and can be useful for debugging.
+     * The prefetchArgs object contains a ssrContext property (not been able to confirm this), which is supplied server-side, and can be useful for debugging.
      */
     console.log('prefetchArgs', prefetchArgs);
 
