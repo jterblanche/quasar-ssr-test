@@ -1,13 +1,31 @@
 <template>
   <q-page class="row items-center justify-evenly">
-    {{ stateStore.isomorphicItem }}
+    <h1>Quasar SSR Demo</h1>
+    <p>
+      Read the entire Quasar SSR documentation section at
+      <a href="https://quasar.dev/quasar-cli-vite/developing-ssr/introduction"
+        >https://quasar.dev/quasar-cli-vite/developing-ssr/introduction</a
+      >
+      very carefully.
+    </p>
+    <p>
+      SSR + PWA is a killer combo:
+      <a href="https://quasar.dev/quasar-cli-vite/developing-ssr/ssr-with-pwa"
+        >https://quasar.dev/quasar-cli-vite/developing-ssr/ssr-with-pwa</a
+      >
+    </p>
+    <h2>Store State</h2>
+    <p>isomorphicItem: {{ stateStore.isomorphicItem }}</p>
   </q-page>
 </template>
 
 <script lang="ts">
 import { useStateStore } from '@stores/stateStore';
+import { useSSRContext } from 'vue';
 export default {
   preFetch(prefetchArgs) {
+    console.log('prefetchArgs', prefetchArgs);
+
     const { currentRoute, previousRoute, redirect, urlPath, publicPath } =
       prefetchArgs;
 
@@ -27,8 +45,9 @@ export default {
 
     /**
      * The prefetchArgs object contains a ssrContext property (not been able to confirm this), which is supplied server-side, and can be useful for debugging.
+     * I suspect it is the same object as returned by useSSRContext() from the vue module.
      */
-    console.log('prefetchArgs', prefetchArgs);
+    const ssrContext = useSSRContext();
 
     // In the example below, this prefetch hook can redirect to a login page if the user is not authenticated.
     // We assume here we already wrote the authentication logic
