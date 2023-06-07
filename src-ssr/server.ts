@@ -54,6 +54,14 @@ export const create = ssrCreate((/* { ... } */) => {
  * handler for serverless use or whatever else fits your needs.
  */
 export const listen = ssrListen(async ({ app, port, isReady }) => {
+  if (process.env.PROD) {
+    /**
+     * For serverless environments, we can't use the listen function above,
+     * as the server is not started by us. Instead, we export a handler
+     * that can be used by the serverless environment to start the server.
+     */
+    console.warn('This server WILL NOT run in serverless environments - you need to update the listen function in src-ssr/server.ts');
+  }
   await isReady();
   return app.listen(port, () => {
     if (process.env.PROD) {
