@@ -80,7 +80,7 @@ module.exports = configure(function (/* ctx */) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
-      open: true, // opens browser window automatically
+      open: false, // opens browser window automatically
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
@@ -125,7 +125,13 @@ module.exports = configure(function (/* ctx */) {
       // extendSSRWebserverConf (esbuildConf) {},
       // extendPackageJson (json) {},
 
-      pwa: true,
+      /**
+       * From https://quasar.dev/quasar-cli-webpack/developing-pwa/hmr-for-dev/
+       * When your development activity does not include configuring the Service Worker (like when editing the “/src-pwa/register-service-worker.js” file),
+       * then you can safely trigger the $ quasar dev -m spa (instead of $ quasar dev -m pwa) command to avoid the extra hassle of paying attention to
+       * the effects of the Service Worker – which sometimes may get in the way.
+       */
+      pwa: false,
 
       // manualStoreHydration: true,
       // manualPostHydrationTrigger: true,
