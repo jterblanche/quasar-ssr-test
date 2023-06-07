@@ -14,23 +14,16 @@
         >https://quasar.dev/quasar-cli-vite/developing-ssr/ssr-with-pwa</a
       >
     </p>
-    <h2>Store State</h2>
-    <p>isomorphicItem: {{ stateStore.isomorphicItem }}</p>
   </q-page>
 </template>
 
 <script lang="ts">
-import { useStateStore } from '@stores/stateStore';
-import { useSSRContext } from 'vue';
 export default {
   preFetch(prefetchArgs) {
-    console.log('prefetchArgs', prefetchArgs);
-
-    const { currentRoute, previousRoute, redirect, urlPath, publicPath } =
-      prefetchArgs;
-
-    const stateStore = useStateStore();
-
+    // console.log('prefetchArgs', prefetchArgs);
+    // const { currentRoute, previousRoute, redirect, urlPath, publicPath } =
+    //   prefetchArgs;
+    // const stateStore = useStateStore();
     /**
      * IMPORTANT: Read the entire page at https://quasar.dev/quasar-cli-vite/prefetch-feature to understand how this works.
      *
@@ -41,22 +34,18 @@ export default {
      * It is HIGHLY recommended to populate a Pinia store here, which can then be used by client side code.
      * For example, here we're setting the value of a store property, and in the component we're using the store property.
      */
-    stateStore.isomorphicItem.value = 'This is an isomorphic item';
-
+    // stateStore.isomorphicItem.value = 'This is an isomorphic item';
     /**
      * The prefetchArgs object contains a ssrContext property (not been able to confirm this), which is supplied server-side, and can be useful for debugging.
      * I suspect it is the same object as returned by useSSRContext() from the vue module.
      */
-    const ssrContext = useSSRContext();
-
+    // const ssrContext = useSSRContext();
     // In the example below, this prefetch hook can redirect to a login page if the user is not authenticated.
     // We assume here we already wrote the authentication logic
     // in the Pinia Store, so take as a high-level example only.
-
     // if (!stateStore.authenticated) {
     //   redirect({ path: '/login' });
     // }
-
     /**
      * It is good UX practice to let the user know if something async is happening.
      * When you add Quasar LoadingBar plugin to your app, Quasar CLI will use it while it runs the preFetch hooks by default.
@@ -74,6 +63,6 @@ export default {
  * This script runs in a different scope on the client,
  * we therefore need to instantiate the store again.
  */
-const stateStore = useStateStore();
+// const stateStore = useStateStore();
 // We can now access the store properties and methods.
 </script>
