@@ -13,7 +13,7 @@ const { configure } = require('quasar/wrappers');
 module.exports = configure(function (/* ctx */) {
   return {
     eslint: {
-      // fix: true,
+      fix: true,
       // include: [],
       // exclude: [],
       // rawOptions: {},
@@ -27,7 +27,13 @@ module.exports = configure(function (/* ctx */) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ['axios'],
+    boot: [
+      'axios',
+      {
+        client: false,
+        path: 'server-state',
+      },
+    ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ['app.scss'],
@@ -58,11 +64,10 @@ module.exports = configure(function (/* ctx */) {
       // vueDevtools,
       // vueOptionsAPI: false,
 
-      // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
+      rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
